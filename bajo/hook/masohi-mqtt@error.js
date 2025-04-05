@@ -1,5 +1,5 @@
-async function error ({ payload }) {
-  this.log.error('error%s', payload.data)
+async function error ({ error }) {
+  this.log.error(error)
 }
 
 export default error

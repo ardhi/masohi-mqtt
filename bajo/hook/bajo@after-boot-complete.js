@@ -7,16 +7,20 @@ async function afterBootComplete () {
     const client = mqtt.connect(c.url, c.options)
     for (const evt of this.events) {
       client.on(evt, async (...args) => {
-        const opts = { source: `${this.name}.${c.name}`, payload: { type: 'string', data: undefined } }
+        let source = `${this.name}.${c.name}` // <ns>.<connName>[:<topic>]
+        let payload
+        let error
         let path = evt
         if (evt === 'message') {
           path = 'data'
-          opts.source += `:${args[0]}`
-          opts.payload.data = args[1].toString()
+          source += `:${args[0]}` // see above format, args[0] is MQTT topic
+          payload = args[1].toString()
+          if (c.payloadType === 'json') payload = JSON.parse(payload)
+        } else if (evt === 'error') {
+          error = args[0]
         }
-        if (evt === 'error') opts.payload = { type: 'error', data: args[0].message }
-        await runHook(`${this.name}:${path}`, opts, c.name)
-        await runHook(`${this.name}.${c.name}:${path}`, opts)
+        await runHook(`${this.name}:${path}`, { payload, source, error }, c)
+        await runHook(`${this.name}.${c.name}:${path}`, { payload, source, error })
       })
     }
     c.instance = client

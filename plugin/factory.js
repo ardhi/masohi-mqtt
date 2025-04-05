@@ -8,7 +8,8 @@ async function factory (pkgName) {
       this.dependencies = ['masohi']
       this.config = {
         connections: [],
-        subscribers: []
+        subscribers: [],
+        stations: []
       }
       this.events = ['connect', 'reconnect', 'close', 'disconnect', 'offline',
         'error', 'end', 'message']
@@ -28,6 +29,14 @@ async function factory (pkgName) {
         if (!item.options.clientId) item.options.clientId = generateId()
       }
       this.connections = await buildCollections({ ns: this.name, handler: connHandler, container: 'connections' })
+    }
+
+    getStationData = ({ payload, source }) => {
+      const { breakNsPath } = this.app.bajo
+      const { find } = this.lib._
+      const { subNs: connection, path } = breakNsPath(source)
+      const [cid, , lid] = path.split('/')
+      return find(this.config.stations, { connection, id: `${cid}-${lid}` })
     }
   }
 }
