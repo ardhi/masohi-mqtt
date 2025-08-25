@@ -1,11 +1,12 @@
 async function factory (pkgName) {
   const me = this
 
-  return class MasohiMqtt extends this.lib.Plugin {
+  class MasohiMqtt extends this.lib.Plugin {
+    static dependencies = ['masohi']
+    static alias = 'mqtt'
+
     constructor () {
       super(pkgName, me.app)
-      this.alias = 'mqtt'
-      this.dependencies = ['masohi']
       this.config = {
         connections: [],
         subscribers: [],
@@ -39,6 +40,8 @@ async function factory (pkgName) {
       return find(this.config.stations, { connection, id: `${cid}-${lid}` })
     }
   }
+
+  return MasohiMqtt
 }
 
 export default factory
