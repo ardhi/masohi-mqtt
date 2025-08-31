@@ -1,7 +1,7 @@
 async function factory (pkgName) {
   const me = this
 
-  class MasohiMqtt extends this.lib.Plugin {
+  class MasohiMqtt extends this.app.pluginClass.base {
     static dependencies = ['masohi']
     static alias = 'mqtt'
 
@@ -21,7 +21,7 @@ async function factory (pkgName) {
 
       const connHandler = ({ item, options }) => {
         const { generateId } = this.app.bajo
-        const { isString, has } = this.lib._
+        const { isString, has } = this.app.lib._
         if (isString(item)) item = { url: item }
         if (!has(item, 'url')) throw this.error('connMustHave%s', 'url')
         item.options = item.options ?? {}
@@ -34,7 +34,7 @@ async function factory (pkgName) {
 
     getStationData = ({ payload, source }) => {
       const { breakNsPath } = this.app.bajo
-      const { find } = this.lib._
+      const { find } = this.app.lib._
       const { subNs: connection, path } = breakNsPath(source)
       const [cid, , lid] = path.split('/')
       return find(this.config.stations, { connection, id: `${cid}-${lid}` })

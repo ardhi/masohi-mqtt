@@ -1,5 +1,5 @@
 async function connect ({ source }) {
-  const { find } = this.lib._
+  const { find } = this.app.lib._
   const { breakNsPath } = this.app.bajo
   const opts = breakNsPath(source)
   const { subNs } = opts
