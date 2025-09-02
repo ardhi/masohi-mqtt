@@ -29,7 +29,7 @@ async function factory (pkgName) {
         if (isString(item.topic)) item.topic = [item.topic]
         if (!item.options.clientId) item.options.clientId = generateId()
       }
-      this.connections = await buildCollections({ ns: this.name, handler: connHandler, container: 'connections' })
+      this.connections = await buildCollections({ ns: this.ns, handler: connHandler, container: 'connections' })
     }
 
     getStationData = ({ payload, source }) => {

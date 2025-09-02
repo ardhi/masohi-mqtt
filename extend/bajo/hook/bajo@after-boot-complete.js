@@ -7,7 +7,7 @@ async function afterBootComplete () {
     const client = mqtt.connect(c.url, c.options)
     for (const evt of this.events) {
       client.on(evt, async (...args) => {
-        let source = `${this.name}.${c.name}` // <ns>.<connName>[:<topic>]
+        let source = `${this.ns}.${c.name}` // <ns>.<connName>[:<topic>]
         let payload
         let error
         let path = evt
@@ -19,8 +19,8 @@ async function afterBootComplete () {
         } else if (evt === 'error') {
           error = args[0]
         }
-        await runHook(`${this.name}:${path}`, { payload, source, error }, c)
-        await runHook(`${this.name}.${c.name}:${path}`, { payload, source, error })
+        await runHook(`${this.ns}:${path}`, { payload, source, error }, c)
+        await runHook(`${this.ns}.${c.name}:${path}`, { payload, source, error })
       })
     }
     c.instance = client
