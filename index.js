@@ -1,6 +1,17 @@
+/**
+ * Plugin factory
+ *
+ * @param {string} pkgName - NPM package name
+ * @returns {class}
+ */
 async function factory (pkgName) {
   const me = this
 
+  /**
+   * MasohiMqtt class
+   *
+   * @class
+   */
   class MasohiMqtt extends this.app.pluginClass.base {
     static dependencies = ['masohi']
     static alias = 'mqtt'
