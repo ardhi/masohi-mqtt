@@ -1,6 +1,6 @@
 {
   "name": "masohi-mqtt",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "MQTT binding for Masohi Messaging",
   "main": "index.js",
   "scripts": {

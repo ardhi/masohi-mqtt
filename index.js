@@ -12,7 +12,7 @@ async function factory (pkgName) {
    *
    * @class
    */
-  class MasohiMqtt extends this.app.pluginClass.base {
+  class MasohiMqtt extends this.app.baseClass.Base {
     static dependencies = ['masohi']
     static alias = 'mqtt'
 
@@ -31,7 +31,7 @@ async function factory (pkgName) {
       const { buildCollections } = this.app.bajo
 
       const connHandler = ({ item, options }) => {
-        const { generateId } = this.app.bajo
+        const { generateId } = this.app.lib.aneka
         const { isString, has } = this.app.lib._
         if (isString(item)) item = { url: item }
         if (!has(item, 'url')) throw this.error('connMustHave%s', 'url')
