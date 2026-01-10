@@ -13,9 +13,6 @@ async function factory (pkgName) {
    * @class
    */
   class MasohiMqtt extends this.app.baseClass.Base {
-    static dependencies = ['masohi']
-    static alias = 'mqtt'
-
     constructor () {
       super(pkgName, me.app)
       this.config = {
