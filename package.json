@@ -1,6 +1,6 @@
 {
   "name": "masohi-mqtt",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "MQTT binding for Masohi Messaging",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,7 @@
   "type": "module",
   "bajo": {
     "type": "plugin",
-    "alias": "mmqtt",
-    "dependencies": ["masohi"]
+    "alias": "mmqtt"
   },
   "repository": {
     "type": "git",

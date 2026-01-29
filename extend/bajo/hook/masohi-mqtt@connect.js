@@ -7,7 +7,7 @@ async function connect ({ source }) {
   const conn = find(this.connections, { name: subNs })
   if (!conn) return
   for (const topic of conn.topic) {
-    conn.instance.subscribe(topic, err => {
+    conn.client.subscribe(topic, err => {
       if (err) this.log.error('cantSubscribeTo%s%s%s', subNs, topic, err.message)
     })
   }
