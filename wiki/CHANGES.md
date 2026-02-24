@@ -1,5 +1,9 @@
 # Changes
 
+## 2026-02-25
+
+- [2.2.1] Bug fix on ```onMessage``` event
+
 ## 2026-01-29
 
 - [2.2.0] Change to hook ```bajo:afterBoot```

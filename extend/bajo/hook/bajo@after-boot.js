@@ -20,8 +20,12 @@ async function afterBoot () {
         if (evt === 'message') {
           path = 'data'
           source += `:${args[0]}` // see above format, args[0] is MQTT topic
-          payload = args[1]
-          if (conn.payloadType === 'json') payload = JSON.parse(payload.toString())
+          payload = args[1].toString()
+          if (conn.payloadType === 'json') {
+            try {
+              payload = JSON.parse(payload.toString())
+            } catch (err) {}
+          }
         } else if (evt === 'error') {
           error = args[0]
         }
