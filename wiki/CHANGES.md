@@ -1,8 +1,12 @@
 # Changes
 
+## 2026-05-29
+
+- [2.2.2] Bug fix in ```init()```
+
 ## 2026-02-25
 
-- [2.2.1] Bug fix on ```onMessage``` event
+- [2.2.1] Bug fix in ```onMessage``` event
 
 ## 2026-01-29
 

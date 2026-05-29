@@ -36,6 +36,7 @@ async function factory (pkgName) {
         item.topic = item.topic ?? []
         if (isString(item.topic)) item.topic = [item.topic]
         if (!item.options.clientId) item.options.clientId = generateId()
+        return item
       }
       this.connections = await buildCollections({ ns: this.ns, handler: connHandler, container: 'connections' })
     }
